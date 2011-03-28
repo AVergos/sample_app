@@ -10,12 +10,18 @@ class UsersController < ApplicationController
     @title = "Sign up"
   end
 
+  def reset
+    @user.password = ""
+    @user.password_confirmation = ""
+  end
+
   def create
     @user = User.new(params[:user])
     if @user.save
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
     else
+      reset
       @title = "Sign up"
       render 'new'
     end
