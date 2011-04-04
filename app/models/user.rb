@@ -1,20 +1,19 @@
-# == Schema Information
-# Schema version: 20110324104924
-#
-# Table name: users
-#
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class User < ActiveRecord::Base 
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
 
   has_many :microposts, :dependent => :destroy
+
+  has_many :relationships, :foreign_key => "follower_id",
+                           :dependent => :destroy
+
+  has_many :following, :through => :relationships, :source => :followed
+
+  has_many :reverse_relationships, :foreign_key => "followed_id",
+                                   :class_name => "Relationship",
+                                   :dependent => :destroy
+
+  has_many :followers, :through => :reverse_relationships, :source => :follower
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -47,9 +46,25 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user :nil
   end
 
+  def following?(followed)
+    relationships.find_by_followed_id(followed)
+  end
+
+  def follow!(followed)
+   #same as:  self.relationships.create!(:followed_id => followed_id)
+    relationships.create!(:followed_id => followed.id)
+  end
+
+  def unfollow!(followed)
+    relationships.find_by_followed_id(followed).destroy
+  end
+
   def feed
-    #This is preliminary. See Chapter 12 for the full implementation.
-    Micropost.where("user_id = ?", id)
+    #This is for showing only the user's microposts'.
+    #Micropost.where("user_id = ?", id)
+    
+    #This is the modified , to show microposts from followed
+    Micropost.from_users_followed_by(self)
   end
 
   private
