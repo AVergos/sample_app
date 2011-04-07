@@ -1,5 +1,5 @@
 <% unless @feed_items.empty? %>
-<p><%= link_to "RSS Feed", microposts_path(:rss) %></p>
+<p><%= link_to image_tag("rss.png", :alt => "rss img"), microposts_path(:rss) %></p>
   <%= form_tag microposts_path, :method => 'get', :id => "feed_search" do %>
     <p>
       <%= text_field_tag :search, params[:search] %>
