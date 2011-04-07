@@ -9,6 +9,8 @@ SampleApp::Application.routes.draw do
   resources :microposts,    :only => [:create, :destroy]
   resources :relationships, :only => [:create, :destroy]
 
+  match '/microposts/', :to => 'pages#home'
+  match '/microposts/:id', :to => 'users#show'
   match '/signup',  :to => 'users#new'
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'

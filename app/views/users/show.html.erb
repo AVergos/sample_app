@@ -7,10 +7,14 @@
       </h1>
       <%= render 'follow_form' if signed_in? %>
       <% unless @user.microposts.empty? %>
-        <table class="microposts" summary="User microposts">
-          <%= render @microposts %>
-        </table>
-        <%= will_paginate @microposts %>
+      
+      <%= form_tag micropost_path, :method => 'get', :id => "microposts_search" do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :name => nil %>
+        </p>
+      <% end %>
+        <div id="microindex"><%= render 'microposts' %></div>
       <% end %>
     </td>
     <td class="sidebar round">

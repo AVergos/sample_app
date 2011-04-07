@@ -1,7 +1,10 @@
 <% unless @feed_items.empty? %>
-  <table class="microposts" summary="User microposts">
-    <%= render :partial => 'shared/feed_item', :collection => @feed_items %>
-  </table>
-  <%= will_paginate @feed_items %>
+  <%= form_tag microposts_path, :method => 'get', :id => "feed_search" do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search Content", :name => nil %>
+    </p>
+  <% end %>
+  <div id="feedindex"><%= render 'feeds' %></div>
 <% end %>
 
