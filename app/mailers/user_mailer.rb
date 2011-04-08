@@ -1,10 +1,9 @@
 class UserMailer < ActionMailer::Base
-  default :from => "vrgs.andreas@gmail.com"
   
   def registration_confirmation(user)
     @user = user
     @url = "http://stormy-rain-34.heroku.com/signin"
-    mail(:to => user.email, :subject => "Registered")
+    mail(:to => user.email, :subject => "Registered", :from => "vrgs.andreas@gmail.com")
   end
   
   def follow_confirmation(user,current_user)
