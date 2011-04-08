@@ -7,11 +7,13 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Registered")
   end
   
-  def follow_confirmation(user)
+  def follow_confirmation(user,current_user)
+    @current_user = current_user
     mail(:to => user.email, :subject => "Someone is following you!")
   end
   
-  def unfollow_confirmation(user)
+  def unfollow_confirmation(user,current_user)
+    @current_user = current_user
     mail(:to => user.email, :subject => "Someone no longer follows you :( ")
   end
 end
