@@ -101,6 +101,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer (= 3.0.5)
   annotate-models (= 1.0.4)
   factory_girl_rails (= 1.0)
   faker (= 0.9.5)

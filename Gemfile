@@ -4,6 +4,7 @@ gem 'rails', '3.0.5'
 gem 'gravatar_image_tag', '1.0.0'
 gem 'will_paginate', '3.0.pre2'
 gem 'jquery-rails'
+gem 'actionmailer', '3.0.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

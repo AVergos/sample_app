@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     redirect_to(root_path) if signed_in?
     @user = User.new(params[:user])
     if @user.save
+      UserMailer.registration_confirmation(@user).deliver
       sign_in @user
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
