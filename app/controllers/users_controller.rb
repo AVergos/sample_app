@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
       sign_in @user
-      flash[:success] = "An account activation mail has been send to your email"
+      flash[:success] = "An account activation mail has been send to your email!"
       redirect_to @user
     else
       reset
