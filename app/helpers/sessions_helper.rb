@@ -14,7 +14,7 @@ module SessionsHelper
   end
 
   def signed_in?
-    !current_user.nil?
+    !current_user.nil? and current_user.activated.eql? "Active"
   end
 
   def sign_out

@@ -9,6 +9,7 @@ SampleApp::Application.routes.draw do
   resources :microposts,    :only => [:create, :destroy]
   resources :relationships, :only => [:create, :destroy]
 
+  match '/users/:id/activate/:token', :controller => 'users', :action => 'activate'
   match '/microposts/', :to => 'pages#home'
   match '/microposts/:id', :to => 'users#show'
   match '/signup',  :to => 'users#new'

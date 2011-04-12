@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   
   def registration_confirmation(user)
     @user = user
-    @url = "http://stormy-rain-34.heroku.com/signin"
+    #@url = "http://stormy-rain-34.heroku.com/signin"
     mail(:to => user.email, :subject => "Registered", :from => "vrgs.andreas@gmail.com")
   end
   

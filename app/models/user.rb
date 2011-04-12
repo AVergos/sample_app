@@ -28,11 +28,11 @@ class User < ActiveRecord::Base
                        :confirmation => true,
                        :length       => { :within => 6..40 }
 
-  before_save :encrypt_password
+  before_save :encrypt_password, :set_token
 
   # Return true if the user's password matches the submitted password.
   def has_password?(submitted_password)
-    encrypted_password == encrypt(submitted_password)
+    crypted_password == encrypt(submitted_password)
   end
 
   def self.authenticate(email, submitted_password)
@@ -76,10 +76,14 @@ class User < ActiveRecord::Base
   end
 
   private
+  
+    def set_token
+      self.token = Digest::SHA1.hexdigest([Time.now, rand].join) if new_record?
+    end
 
     def encrypt_password
       self.salt = make_salt if new_record?
-      self.encrypted_password = encrypt(password)
+      self.crypted_password = encrypt(password)
     end
 
     def encrypt(string)

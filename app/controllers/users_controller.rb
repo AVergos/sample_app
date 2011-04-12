@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :except => [:show, :new, :create]
+  before_filter :authenticate, :except => [:show, :new, :create, :activate]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user,   :only => :destroy
 
@@ -32,13 +32,26 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
       sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "An account activation mail has been send to your email"
       redirect_to @user
     else
       reset
       @title = "Sign up"
       render 'new'
     end
+  end
+  
+  def activate
+    @user = User.find(params[:id])
+    if (params[:token]) == @user.token
+      @user.update_attribute(:activated, 'Active')
+      flash[:success] = "You have successfully activated your account."
+      flash[:notice] = "Please retype your password."
+      redirect_to edit_user_path
+    else
+      flash[:notice] = "Token missmatch."
+      redirect_to root_path
+     end
   end
 
   def edit
