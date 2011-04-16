@@ -17,6 +17,12 @@ class MicropostsController < ApplicationController
     @micropost.destroy
     redirect_back_or root_path
   end
+  
+  def add_new_comment
+    micropost = Micropost.find(params[:id])
+    micropost.comments << Comment.new(params[:comment].merge({:user_id => current_user.id}))
+    redirect_to root_path
+  end
 
   private
 

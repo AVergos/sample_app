@@ -1,5 +1,6 @@
 class Micropost < ActiveRecord::Base
-  attr_accessible :content
+
+  acts_as_commentable
 
   belongs_to :user
 

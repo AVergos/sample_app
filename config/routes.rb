@@ -19,6 +19,8 @@ SampleApp::Application.routes.draw do
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
+  
+  match "posts/add_new_comment" => "microposts#add_new_comment", :as => "add_new_comment_to_posts", :via => [:post]
 
   root :to => 'pages#home'
 end

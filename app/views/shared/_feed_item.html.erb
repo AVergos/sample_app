@@ -10,6 +10,21 @@
     <span class="timestamp">
       Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
     </span>
+    <% feed_item.comments.each do |comment| %>
+      <span class="user">
+        <% @user = User.find_by_id(comment.user_id) %>
+        <%= link_to @user.name, @user %>
+      </span>
+      <span class="content"><%= comment.comment %></span>
+      <span class="timestamp">
+        Posted <%= time_ago_in_words(comment.created_at) %> ago.
+      </span>
+    <% end %>
+    <%= form_tag "/posts/add_new_comment" do %>
+      <%= hidden_field_tag "id", feed_item.id %>
+      <%= text_field_tag "comment[comment]" %>
+      <%= submit_tag "Post Comment" %>
+    <% end %>
   </td>
   <% if current_user?(feed_item.user) %>
   <td>
