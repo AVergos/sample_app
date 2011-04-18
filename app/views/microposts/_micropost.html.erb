@@ -6,8 +6,8 @@
     </span>
     <% micropost.comments.each do |comment| %>
       <span class="user">
-        <% @user = User.find_by_id(comment.user_id) %>
-        <%= link_to @user.name, @user %>
+        <% @usercomment = User.find_by_id(comment.user_id) %>
+        <%= link_to @usercomment.name, @usercomment %>
       </span>
       <span class="content"><%= comment.comment %></span>
       <span class="timestamp">
