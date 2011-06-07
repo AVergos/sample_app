@@ -120,10 +120,8 @@ a.signup_button {
 
 footer {
   text-align: center;
-  margin-top: 10px;
+  margin: 10px auto 30px;  
   width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 footer nav {
