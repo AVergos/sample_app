@@ -5,19 +5,22 @@
       Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     </span>
     <% micropost.comments.each do |comment| %>
-      <span class="user">
+      <span class="comment">
         <% @usercomment = User.find_by_id(comment.user_id) %>
+        <span class="gravatar_comment_profile">
+          <%= link_to gravatar_for(@usercomment), @usercomment %>
+        </span>
         <%= link_to @usercomment.name, @usercomment %>
       </span>
-      <span class="content"><%= comment.comment %></span>
-      <span class="timestamp">
+      <span class="commentcontent"><%= comment.comment %></span>
+      <span class="timestamp comment">
         Posted <%= time_ago_in_words(comment.created_at) %> ago.
       </span>  
     <% end %>
   </td>
   <% user = micropost.user rescue User.find(micropost.user_id) %>  
   <% if current_user?(user) %>
-  <td>
+  <td id="deletefeed">
     <%= link_to "delete", micropost, :method => :delete,
                                      :confirm => "You sure?",
                                      :title => micropost.content %>

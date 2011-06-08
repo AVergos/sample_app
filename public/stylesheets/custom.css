@@ -287,6 +287,13 @@ form.new_micropost textarea {
   font-size: 80%;
 }
 .gravatar_comment img {
+  position: relative;
+  top: 10px;
+  width: 30px;
+}
+.gravatar_comment_profile img {
+  position: relative;
+  top: -5px;
   width: 30px;
 }
 
