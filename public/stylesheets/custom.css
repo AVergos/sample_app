@@ -286,4 +286,7 @@ form.new_micropost textarea {
 .commentcontent{
   font-size: 80%;
 }
+.gravatar_comment img {
+  width: 30px;
+}
 

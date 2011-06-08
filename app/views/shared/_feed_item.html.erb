@@ -13,6 +13,9 @@
     <% feed_item.comments.each do |comment| %>
       <span class="comment">
         <% @usercomment = User.find_by_id(comment.user_id) %>
+        <span class="gravatar_comment">
+          <%= link_to gravatar_for(@usercomment), @usercomment %>
+        </span>
         <%= link_to @usercomment.name, @usercomment %>
       </span>
       <span class="commentcontent"><%= comment.comment %></span>
