@@ -276,4 +276,12 @@ form.new_micropost textarea {
 .users li:nth-child(even) {
   background:#010101;
 }
+.comment {
+  margin-left: 10px;
+  padding-left: 10px;
+  font-size: 80%;
+}
+.commentcontent{
+  font-size: 80%;
+}
 

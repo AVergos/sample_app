@@ -11,12 +11,12 @@
       Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
     </span>
     <% feed_item.comments.each do |comment| %>
-      <span class="user">
+      <span class="comment">
         <% @usercomment = User.find_by_id(comment.user_id) %>
         <%= link_to @usercomment.name, @usercomment %>
       </span>
-      <span class="content"><%= comment.comment %></span>
-      <span class="timestamp">
+      <span class="commentcontent"><%= comment.comment %></span>
+      <span class="timestamp comment">
         Posted <%= time_ago_in_words(comment.created_at) %> ago.
       </span>
     <% end %>
